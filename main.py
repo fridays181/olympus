@@ -43,6 +43,7 @@ def sce_one():
         print("Steve: Back in my day we always had time to be robbed")
         print("Steve: Bye you whipper snapper!")
         gb_meter()
+    sce_pick()
 def sce_two():
     global health
     bars()
@@ -67,14 +68,38 @@ def sce_two():
     else:
         print("Bob: Well no need to be so rude :(")
         gb_meter()
+    sce_pick()
+def sce_three():
+    bars()
+    global health
+    print("Glorbflork the 3rd: Hello there")
+    print("Glorbflork the 3rd: You wanna sell something for me?")
+    x = int(input("Yeah sure(1) or No imma pass(2)"))
+    if x == 1:
+        print("Glorbflork the 3rd: Glad to hear it ;)")
+        print("Narrator: lets just say things didnt go good")
+        health = health - 1
+        gb_meter()
+    else:
+        print("Glorbflork the 3rd: I like your attidude")
+        print("Glorbflork the 3rd: Hears one glumpfuncion<3")
+        print("Narrator: you throw it away quickly")
+        health = health + 1
+        gb_meter()
+    sce_pick()
 
 #scene picker
 def sce_pick():
-    xx = random.randint(1, 2)
+    xx = random.randint(1, 3)
     if xx == 1:
         sce_one()
-    else:
+        sce_pick()
+    elif xx == 2:
         sce_two()
+        sce_pick()
+    else:
+        sce_three()
+        sce_pick()
 #based on health ranging from -2 - 2 it will change the graphic
 def gb_meter():
     global health
@@ -86,10 +111,15 @@ def gb_meter():
         health_meter = ["|", "v", "0", "^", "^"]
     elif health == 1:
         health_meter = ["v", "v", "0", "|", "^"]
-    elif health == 2:
+    elif health >= 2:
         health_meter = ["v", "v", "0", "^", "|"]
-    else:
+    elif health == 0:
         health_meter = ["v", "v", "|", "^", "^"]
+    else:
+        print("You lost:(")
+        print("Your score is ")
+        print(score)
+        menu()
     print(health_meter)
 
 #main menu
